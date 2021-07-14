@@ -9,7 +9,7 @@
 
           <!--- POPUP using vue-poopperjs startes here -->
 
-          <popper trigger="hover" 
+          <popper trigger="clickToToggle" 
             :options="{
                 placement: 'left',
                 modifiers: { offset: { offset: '0,10px' } }
