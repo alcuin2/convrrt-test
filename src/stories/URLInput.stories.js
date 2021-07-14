@@ -5,7 +5,7 @@ export default {
 }
 
 
-export const withJSX = () => ({
+export const ShowCompleted = () => ({
   render() {
     return <URLInput />;
   }

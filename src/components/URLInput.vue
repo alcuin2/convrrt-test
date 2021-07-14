@@ -1,9 +1,14 @@
 <template>
-    
+
+    <!-- Template styles by tailwindcss -->
+
       <div class="container mt-20 flex justify-center items-center mx-auto">
         <div class="relative rounded-lg"
           v-bind:class = "store.input=='' && store.typing?'border border-red-200':'border-transparent'"
           >
+
+          <!--- POPUP using vue-poopperjs startes here -->
+
           <popper trigger="hover" 
             :options="{
                 placement: 'left',
@@ -56,6 +61,10 @@
 
             </div>
           </popper>
+
+          <!-- POPPER ends here -->
+
+          <!-- Input box starts here -->
            
            <input type="text" 
               class="h-14 w-96 rounded-lg z-0 focus:shadow focus:outline-none bg-gray-100" 
@@ -64,6 +73,9 @@
               v-bind:class = "store.typing?'pl-5 pr-24':'pl-16 pr-24'"
               @focus="focusAction"
               />
+          <!-- Input box ends here -->
+
+          <!-- Dynamic Validation component begins here: 2 States: Check when typing or Delete when validated -->
 
             <div 
               class="absolute h-full top-0 right-12 flex justify-center items-center w-12"
@@ -85,7 +97,9 @@
                  
             </div>
 
+            <!-- Dynamic Validation component ends here -->
 
+            <!-- Toggle link type destination and cancel component (when typing) begins here -->
             <div 
               class="absolute h-full top-0 right-0 flex justify-center items-center w-12 cursor-pointer rounded-r-lg hover:bg-gray-400"
               @click="flipTargetLinkBlank"
@@ -104,6 +118,7 @@
               > 
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 text-white z-20" role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg> 
             </div>
+            <!-- Toggle link/cancel heres -->
         </div>
     
   </div>
@@ -111,29 +126,35 @@
 
 <script>
 
-import Popper from 'vue-popperjs';
+import Popper from 'vue-popperjs'; //  for popup
 import 'vue-popperjs/dist/vue-popper.css';
 import Store from "../store";
 
 const store = Store.state.compState;
 
 export default {
+
   name: 'URLInput',
   components: {
     'popper': Popper
   },
+
   data() {
     return {
       store,
     }
   },
+
   computed: {
+    // compute the current input value
     input () {
-      return store.input
+      return store.input 
     }
   },
+
   watch: {
-    input : function (value) {
+    // watch computed input value and change states in store
+    input : function (value) { 
       Store.dispatch('setTyping', true)
       Store.dispatch('setDeleteState', false)
 
@@ -162,6 +183,7 @@ export default {
   },
 
   methods: {
+
     flipSelectedURL: function() {
       if (store.selectedURLState){
         Store.dispatch('setSelectedURLstate', false)
@@ -170,6 +192,7 @@ export default {
         Store.dispatch('setSelectedURLstate', true)
       }
     },
+
     flipTargetLinkBlank: function(){
       if (store.targetLinkBlank){
         Store.dispatch('setTargetLinkBlank', false)
@@ -178,12 +201,14 @@ export default {
         Store.dispatch('setTargetLinkBlank', true)
       }
     },
+
     clearInput: function(){
       Store.dispatch('setInput', '')
       Store.dispatch('setDeleteState', false)
       Store.dispatch('setTyping', false)
       Store.dispatch('setValidated', true)
     },
+
     focusAction: function () {
       if (this.store.validated == false) {
         Store.dispatch('setTyping', true)
@@ -194,6 +219,7 @@ export default {
         Store.dispatch('setValidated', false)
       }
     },
+    
     switchLinkType: function(id) {
       Store.dispatch('setSelectedURLstate', true)
       switch(id) {
