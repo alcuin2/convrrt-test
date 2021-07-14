@@ -1,5 +1,5 @@
 # Convrrt test project
-This is a VueJS project creates a custom url input box with built-in validation as described [here](https://www.notion.so/Take-home-test-URL-box-27e8292659644b1b82188d447df01cd1).
+This is a VueJS project creates a custom url input box with built-in validation (Note that web links must begin with 'http://' or 'https://') as described [here](https://www.notion.so/Take-home-test-URL-box-27e8292659644b1b82188d447df01cd1).
 
 It uses [tailwindcss](http://tailwindcss.com/), and exports to [storybook](https://storybook.js.org)
 
