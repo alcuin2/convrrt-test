@@ -5,7 +5,7 @@ It uses [tailwindcss](http://tailwindcss.com/), and exports to [storybook](https
 
 ## Dependencies
 
-This projects depends on node version 10 and higher
+Successfully tested with `node v14.16.1` and `npm v6.14.12`
 
 ## Project setup
 
